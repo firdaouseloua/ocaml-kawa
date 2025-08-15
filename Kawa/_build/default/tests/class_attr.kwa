@@ -1,0 +1,13 @@
+var point p;
+
+class point {
+  attribute int x;
+  attribute int y;
+}
+
+main {
+  p = new point;
+  p.x = 3;
+  p.y = 4;
+  print(p.x + p.y); // Devrait afficher 7
+}

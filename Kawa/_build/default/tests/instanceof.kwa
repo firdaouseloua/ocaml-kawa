@@ -1,0 +1,46 @@
+var paire p;
+var triple t;
+
+class paire {
+  attribute int x;
+  attribute int y;
+
+  method void constructor(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  method int isInstanceOfTriple() {
+    if (this instanceof triple) {
+      return 1; // 1 if this is an instance of triple
+    } else {
+      return 0; // 0 otherwise
+    }
+  }
+}
+
+class triple extends paire {
+  attribute int z;
+
+  method void constructor(int x, int y, int z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+
+  method int isInstanceOfTriple() {
+    if (this instanceof triple) {
+      return 1; // 1 if this is an instance of triple
+    } else {
+      return 0; // 0 otherwise
+    }
+  }
+}
+
+main {
+  p = new paire(1, 2);
+  t = new triple(3, 4, 5);
+
+  print(p.isInstanceOfTriple()); // Should print 0 (false)
+  print(t.isInstanceOfTriple()); // Should print 1 (true)
+}

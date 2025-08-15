@@ -1,0 +1,39 @@
+var paire p;
+var triple_final tf;
+
+class paire {
+  attribute final int x;
+  attribute int y;
+
+  method void constructor(int x, int y) {
+    this.x = x;  // initialisation dans le constructeur
+    this.y = y;
+  }
+
+  method int somme() {
+    return this.x + this.y;
+  }
+}
+
+class triple_final {
+  attribute final int x;
+  attribute int y;
+  attribute final int z;
+
+  method void constructor(int x, int y, int z) {
+    this.x = x;  // Initialisation explicite
+    this.y = y;
+    this.z = z;
+  }
+
+  method int somme() {
+    return this.x + this.y + this.z;
+  }
+}
+
+main {
+  p = new paire(1, 2);              
+  tf = new triple_final(3, 4, 5);   
+  print(p.somme());  // Affiche 3
+  print(tf.somme()); // Affiche 12
+}

@@ -1,0 +1,13 @@
+var int x, y, z;
+
+var bool a, b;
+var int c, d;
+
+//var int x,; doit afficher une syntaxe error 
+
+main {
+  x = 10;
+  y = 20;
+  z = x + y;
+  print(z); // Devrait afficher 30
+}

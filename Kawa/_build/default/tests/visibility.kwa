@@ -1,0 +1,52 @@
+var parent_class p;
+var child_class c;
+
+class parent_class {
+  public attribute int a;         // Public
+  private attribute int b;        // Private
+  protected attribute int c;      // Protected
+
+  method void constructor(int a, int b, int c) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+  }
+
+  method int getA() {
+    return this.a;  //public
+  }
+
+  method int getB() {
+    return this.b;  //  private, accessible dans la classe
+  }
+
+  method int getC() {
+    return this.c;  // protected, accessible dans la classe
+  }
+}
+
+class child_class extends parent_class {
+  method void constructor(int a, int b,int c) {
+    this.a = a;  //  public
+    this.c = c;  //  protected
+    // ERREUR : Impossible d'initialiser `b` car il est private
+  }
+
+  method int accessC() {
+    return this.c;  // protected, accessible dans une sous-classe
+  }
+
+  //method int accessB() {
+    //return this.b;  // ERREUR : b est private dans la classe parent
+  //}
+}
+
+main {
+  p = new parent_class(1, 2, 3);
+  print(p.getA());  // affiche 1
+  print(p.getC());  // affiche 3
+
+  c = new child_class(4, 5, 6);
+  print(c.accessC());  // affiche 6
+  //print(c.getB());     // ERREUR : b est private dans la classe parent
+}

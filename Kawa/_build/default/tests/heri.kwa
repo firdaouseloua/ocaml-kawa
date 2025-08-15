@@ -1,0 +1,49 @@
+var parent p;
+var child c;
+
+class parent {
+  attribute int x;
+  attribute int y;
+
+  method void constructor(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  method int sum() {
+    return this.x + this.y;
+  }
+}
+
+class child extends parent {
+  attribute int z;
+
+  method void constructor(int x, int y, int z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+
+  method int sum() {
+    return this.x + this.y + this.z; // Redéfinition
+  }
+
+  method int multiply() {
+    return this.x * this.y * this.z;
+  }
+}
+
+main {
+  // Création d'un objet de type parent
+  p = new parent(10, 20);
+  print(p.sum()); // Devrait afficher 30
+
+  // Création d'un objet de type enfant
+  c = new child(2, 3, 4);
+  print(c.sum());      // Devrait afficher 9
+  print(c.multiply()); // Devrait afficher 24
+
+  // Affectation d'un enfant à un parent
+  p = c; 
+  print(p.sum()); // Devrait afficher 9 (utilise la méthode redéfinie)
+}

@@ -1,0 +1,12 @@
+var calculator c;
+
+class calculator {
+  method int add(int a, int b) {
+    return a + b;
+  }
+}
+
+main {
+  c = new calculator;
+  print(c.add(10, 20)); // Devrait afficher 30
+}
