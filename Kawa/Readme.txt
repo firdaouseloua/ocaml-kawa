@@ -1,143 +1,117 @@
 ---------
-#OVERVIEW
+# OVERVIEW
 ---------
-Ce projet implémente un compilateur pour le langage Kawa, avec des fonctionnalités supportant les opérations arithmétiques, la gestion des variables, les instructions, les classes, les attributs, les méthodes, et l’héritage. 
-De plus, des extensions ont été ajoutées pour enrichir le langage : déclaration en série, opérateur instanceof, modificateurs de visibilité (public, protected, private), et attributs final.
+This project implements a compiler for the Kawa language, with features supporting arithmetic operations, variable management, statements, classes, attributes, methods, and inheritance.  
+In addition, extensions have been added to enrich the language: serial declarations, `instanceof` operator, visibility modifiers (`public`, `protected`, `private`), and `final` attributes.
 
-L’implémentation s’est déroulée en quatre grandes étapes :
+The implementation was carried out in four main stages:
 
-kawalexer : Analyse lexicale.
-kawaparser : Analyse syntaxique (grammaticale).
-typechecker : Vérification des types et de la sémantique.
-interpreter : Exécution du programme dans un environnement simulé.
+- **kawalexer**: Lexical analysis.  
+- **kawaparser**: Syntactic (grammatical) analysis.  
+- **typechecker**: Type and semantic checking.  
+- **interpreter**: Execution of the program in a simulated environment.
 
 -----------------------------
-#Fonctionnalités implémentées
+# Implemented Features
 -----------------------------
 
-## Fonctionnalités de base
+## Core Features
 
--Opérations arithmétiques :
-Support des opérations : addition, soustraction, multiplication, division et modulo.
-Fonctionne dans tous les composants (kawalexer, kawaparser, typechecker, interpreter).
-Testée avec des scénarios simples et complexes.
+- **Arithmetic Operations**:  
+  Supports addition, subtraction, multiplication, division, and modulo.  
+  Works in all components (`kawalexer`, `kawaparser`, `typechecker`, `interpreter`).  
+  Tested with both simple and complex scenarios.
 
--Variables :
-Déclaration et assignation de variables.
-Gestion de différents types (int, bool, instances de classes).
-Fonctionnalité testée à travers des cas variés.
+- **Variables**:  
+  Declaration and assignment of variables.  
+  Handles different types (`int`, `bool`, class instances).  
+  Tested through various cases.
 
--Instructions :
-Structures de contrôle prises en charge :
-Instructions conditionnelles if-else.
-Boucles while.
-Instructions return.
-Fonctionne avec des flux de contrôle imbriqués.
+- **Statements**:  
+  Supported control structures:  
+  - Conditional statements `if-else`  
+  - `while` loops  
+  - `return` statements  
+  Works with nested control flows.
 
--Classes et attributs :
-Support pour la définition des classes avec attributs et méthodes.
-Gestion des modificateurs de visibilité (public, protected, private) et des attributs final.
-Héritage des attributs avec vérification des conflits.
+- **Classes and Attributes**:  
+  Support for defining classes with attributes and methods.  
+  Handles visibility modifiers (`public`, `protected`, `private`) and `final` attributes.  
+  Attribute inheritance with conflict checking.
 
--Méthodes :
-Support pour la définition et l’appel des méthodes, y compris les constructeurs.
-Les méthodes respectent les règles de visibilité et les vérifications des paramètres.
-Compatibilité entre les signatures des méthodes héritées et les méthodes des classes filles.
+- **Methods**:  
+  Support for defining and calling methods, including constructors.  
+  Methods comply with visibility rules and parameter checks.  
+  Compatibility between inherited method signatures and subclass methods.
 
--Héritage :
-Support de l’héritage simple avec gestion des relations parent-enfant.
-Les méthodes et attributs hérités respectent les règles de visibilité et d’accès.
+- **Inheritance**:  
+  Support for single inheritance with parent-child relationship management.  
+  Inherited methods and attributes follow visibility and access rules.
 
 ## Extensions
 
--Déclarations en série :
-Possibilité de déclarer plusieurs variables en une seule instruction (exemple : var int a, b, c;).
-Implémenté dans kawaparser et testé dans tous les composants.
+- **Serial Declarations**:  
+  Ability to declare multiple variables in a single statement (example: `var int a, b, c;`).  
+  Implemented in `kawaparser` and tested in all components.
 
--Opérateur instanceof :
-Ajout du test dynamique permettant de vérifier si un objet est une instance (ou sous-type) d'une classe.
-Intégré dans kawaparser, typechecker et interpreter.
+- **`instanceof` Operator**:  
+  Added dynamic test to check if an object is an instance (or subtype) of a class.  
+  Integrated into `kawaparser`, `typechecker`, and `interpreter`.
 
--Modificateurs de visibilité :
-Les attributs et les méthodes peuvent être marqués comme public, protected ou private.
-Les règles de visibilité sont appliquées au niveau du typechecker et du interpreter.
-Tests étendus pour garantir le respect des restrictions d’accès.
+- **Visibility Modifiers**:  
+  Attributes and methods can be marked as `public`, `protected`, or `private`.  
+  Visibility rules are enforced in the `typechecker` and `interpreter`.  
+  Extensive tests to ensure compliance with access restrictions.
 
--Attributs final :
-Les attributs marqués comme final doivent être initialisés dans le constructeur et ne peuvent pas être réassignés.
-Vérifications ajoutées dans le typechecker pour assurer ce comportement.
-Cas d’utilisation testés, y compris pour les attributs hérités.
+- **Final Attributes**:  
+  Attributes marked as `final` must be initialized in the constructor and cannot be reassigned.  
+  Checks added in `typechecker` to enforce this behavior.  
+  Tested use cases, including inherited final attributes.
 
 -----------------------------
-# Processus d’implémentation
+# Implementation Process
 -----------------------------
-
-L’implémentation a suivi une approche méthodique, ligne par ligne, comme indiqué dans le tableau fourni.
- Chaque fonctionnalité a été d'abord ajoutée au lexer, puis analysée dans le parser, validée par le typechecker, et enfin exécutée dans l’interpréteur.
-  Des tests ont été réalisés à chaque étape pour vérifier le bon fonctionnement.
+The implementation followed a step-by-step approach, as shown in the provided table.  
+Each feature was first added to the lexer, then parsed in the parser, validated in the typechecker, and finally executed in the interpreter.  
+Tests were performed at each stage to ensure proper functionality.
 
 -------------------------
-# Problèmes rencontrés
+# Challenges Encountered
 -------------------------
--Gestion de l'héritage : La fusion des attributs et méthodes des classes parentes et enfants a nécessité une gestion fine, notamment pour vérifier la cohérence des types.
-
--Vérificateur de types : La complexité des règles de typage pour l'héritage et les extensions a nécessité des ajustements dans le typechecker.
-
--Problèmes de syntaxe : Plusieurs erreurs dans le fichier kawaparser.mly ont dû être corrigées, notamment pour gérer les nouvelles extensions (extends,.. etc.).
-
--Règles de visibilité :
-La gestion des modificateurs public, protected, et private a nécessité une gestion minutieuse des hiérarchies de classes.
-Le débogage a été complexe, en particulier pour les accès aux attributs dans les sous-classes.
-
--Opérateur instanceof :
-La vérification dynamique des types des objets a posé des défis, notamment avec les relations d’héritage.
-Des tests approfondis ont été nécessaires pour couvrir tous les cas possibles.
-
--Attributs final :
-Imposer la règle selon laquelle les attributs final doivent être initialisés dans le constructeur et ne peuvent pas être réassignés a nécessité une gestion spécifique dans le typechecker.
-Les cas impliquant des attributs final hérités ont ajouté de la complexité.
-
--Combinaison des extensions :
-L’intégration de plusieurs extensions (e.g., visibilité et attributs final) tout en maintenant la cohérence avec l’héritage a nécessité des ajustements importants.
+- **Inheritance Management**: Merging attributes and methods from parent and child classes required careful handling, especially to ensure type consistency.  
+- **Type Checker**: The complexity of typing rules for inheritance and extensions required adjustments in the `typechecker`.  
+- **Syntax Issues**: Several errors in `kawaparser.mly` had to be fixed, particularly for handling new extensions (`extends`, etc.).  
+- **Visibility Rules**: Managing `public`, `protected`, and `private` modifiers required careful handling of class hierarchies. Debugging was complex, especially for attribute access in subclasses.  
+- **`instanceof` Operator**: Dynamic type checking for objects posed challenges, especially with inheritance relationships. Thorough testing was required to cover all possible cases.  
+- **Final Attributes**: Enforcing the rule that final attributes must be initialized in the constructor and cannot be reassigned required special handling in the `typechecker`. Inherited final attributes added complexity.  
+- **Combining Extensions**: Integrating multiple extensions (e.g., visibility and final attributes) while maintaining consistency with inheritance required significant adjustments.
 
 ----------------------
-# Tests et validation
+# Testing and Validation
 ----------------------
-Des tests ont été réalisés pour chaque fonctionnalité, ligne par ligne, comme illustré dans le tableau ci-dessous :
+Tests were performed for each feature, step by step, as shown in the table below:
 
-Fonctionnalité	            kawalexer	kawaparser	typechecker	interpreter
-Opérations arithmétiques	    ✅	    ✅	        ✅	        ✅
-Variables	                    ✅	    ✅	        ✅	        ✅
-Instructions	                ✅	    ✅	        ✅	        ✅
-Classes et attributs	        ✅	    ✅	        ✅	        ✅
-Méthodes	                    ✅	    ✅	        ✅	        ✅
-Héritage	                    ✅	    ✅	        ✅	        ✅
-Déclarations en série	        ✅	    ✅	        ✅	        ✅
-Opérateur instanceof	        ✅	    ✅	        ✅	        ✅
-Modificateurs de visibilité	    ✅	    ✅	        ✅	        ✅
-Attributs final	                ✅	    ✅	        ✅	        ✅
-
+| Feature                  | kawalexer | kawaparser | typechecker | interpreter |
+|--------------------------|-----------|------------|-------------|-------------|
+| Arithmetic Operations    | ✅        | ✅         | ✅          | ✅          |
+| Variables                | ✅        | ✅         | ✅          | ✅          |
+| Statements               | ✅        | ✅         | ✅          | ✅          |
+| Classes & Attributes     | ✅        | ✅         | ✅          | ✅          |
+| Methods                  | ✅        | ✅         | ✅          | ✅          |
+| Inheritance              | ✅        | ✅         | ✅          | ✅          |
+| Serial Declarations      | ✅        | ✅         | ✅          | ✅          |
+| `instanceof` Operator    | ✅        | ✅         | ✅          | ✅          |
+| Visibility Modifiers     | ✅        | ✅         | ✅          | ✅          |
+| Final Attributes         | ✅        | ✅         | ✅          | ✅          |
 
 -----------------------
-# Limitations Actuelles
+# Current Limitations
 -----------------------
-Optimisation : Le code pourrait être optimisé pour réduire la duplication et améliorer la lisibilité.
+- **Optimization**: The code could be optimized to reduce duplication and improve readability.
 
 -------------
 # Conclusion
 -------------
-Le projet implémente avec succès les fonctionnalités de base du langage Kawa, ainsi que plusieurs extensions. Tous les composants ont été rigoureusement testés, et la majorité des fonctionnalités fonctionnent comme prévu. Les extensions (déclaration en série, instanceof, visibilité, attributs final) ont enrichi le langage, bien qu’elles aient introduit des défis supplémentaires.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The project successfully implements the core features of the Kawa language, along with several extensions.  
+All components have been thoroughly tested, and most features work as expected.  
+The extensions (serial declarations, `instanceof`, visibility modifiers, final attributes) have enriched the language, although they introduced additional challenges.
